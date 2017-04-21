@@ -1,0 +1,123 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/hex7c0/mongodb-backup"
+
+    >mongodb-backup (v1.6.9)</a>
+</h1>
+<h4>backup for mongodb</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.mongodb-backup">module mongodb-backup</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.mongodb-backup.mongodb-backup">
+            function <span class="apidocSignatureSpan"></span>mongodb-backup
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.mongodb-backup" id="apidoc.module.mongodb-backup">module mongodb-backup</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.mongodb-backup.mongodb-backup" id="apidoc.element.mongodb-backup.mongodb-backup">
+        function <span class="apidocSignatureSpan"></span>mongodb-backup
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function backup(options) {
+    var opt = options || Object.create(null);
+    if (!opt.uri) throw new Error(&#x22;missing uri option&#x22;);
+    if (!opt.stream) {
+        if (!opt.root) throw new Error(&#x22;missing root option&#x22;);
+        if (fs.existsSync(opt.root) &#x26;&#x26; !fs.statSync(opt.root).isDirectory()) throw new Error(&#x22;root option is not a directory&#x22;);
+    }
+    var my = {
+        dir: path.join(__dirname, &#x22;dump&#x22;, path.sep),
+        uri: String(opt.uri),
+        root: path.resolve(String(opt.root || &#x22;&#x22;)) + path.sep,
+        stream: opt.stream || null,
+        parser: opt.parser || &#x22;bson&#x22;,
+        numCursors: ~~opt.numCursors,
+        collections: Array.isArray(opt.collections) ? opt.collections : null,
+        callback: &#x22;function&#x22; == typeof opt.callback ? opt.callback : null,
+        tar: &#x22;string&#x22; == typeof opt.tar ? opt.tar : null,
+        query: &#x22;object&#x22; == typeof opt.query ? opt.query : {},
+        logger: &#x22;string&#x22; == typeof opt.logger ? path.resolve(opt.logger) : null,
+        options: &#x22;object&#x22; == typeof opt.options ? opt.options : {},
+        metadata: Boolean(opt.metadata)
+    };
+    return my.stream &#x26;&#x26; (my.tar = !0), wrapper(my);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
